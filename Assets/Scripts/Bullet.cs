@@ -1,24 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    int travelFrames;
+    public float speed = 5;
 
-    private void Awake()
+    private void Start()
     {
-        travelFrames = 0;
+        Destroy(gameObject, 5);
     }
 
     void Update()
     {
-        if (gameObject)
-        {
-            transform.position += Vector3.forward;
-            travelFrames++;
-            if (travelFrames >= 40) { Destroy(gameObject); }
-        }
-        
+        transform.Translate (Vector3.forward * speed * Time.deltaTime);
     }
 }
