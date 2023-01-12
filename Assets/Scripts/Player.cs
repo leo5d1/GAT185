@@ -23,19 +23,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //transform.position = new Vector3(2, 3, 4);
-        //transform.rotation = Quaternion.Euler(30, 30, 30);
-        //transform.localScale = Vector3.one * Random.value * 5;
-
         Vector3 direction = Vector3.zero;
 
         direction.z = Input.GetAxis("Vertical");
 
         
         if (Input.GetKey(KeyCode.Space)) direction.y = 1;
-        if (Input.GetKey(KeyCode.LeftShift)) speed = 10;
-
-        //if (direction.y > 0) direction.y -= 0.1f;
+        if (Input.GetKey(KeyCode.LeftShift)) speed = 100;
 
         Vector3 rotation = Vector3.zero;
 
@@ -44,14 +38,11 @@ public class Player : MonoBehaviour
         Quaternion rotate = Quaternion.Euler(rotation * rotationRate * Time.deltaTime);
         transform.rotation = transform.rotation * rotate;
 
-        //transform.position += (direction * speed) * Time.deltaTime;
-
         transform.Translate((direction * speed) * Time.deltaTime);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButton(0))
         {
-            //GetComponent<AudioSource>().Play();
-            GameObject go = Instantiate(prefab, bulletSpawn.position, bulletSpawn.rotation);
+            Instantiate(prefab, bulletSpawn.position, bulletSpawn.rotation);
         }
     }
 }
