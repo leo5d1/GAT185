@@ -11,16 +11,6 @@ public class Player : MonoBehaviour
     public GameObject prefab;
     public Transform bulletSpawn;
 
-	private void Awake()
-	{
-        Debug.Log("awake");
-	}
-
-	void Start()
-    {
-        Debug.Log("start");
-    }
-
     void Update()
     {
         Vector3 direction = Vector3.zero;
@@ -45,4 +35,12 @@ public class Player : MonoBehaviour
             Instantiate(prefab, bulletSpawn.position, bulletSpawn.rotation);
         }
     }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			FindObjectOfType<SpaceGameManager>()?.SetGameOver();
+		}
+	}
 }
